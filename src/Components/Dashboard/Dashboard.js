@@ -37,8 +37,14 @@ export default class Dashboard extends Component {
       
   }
 
+  delete(){
+  const res = axios.post('/api/houses/:id')
+  this.setState({
+    houses:res.data
+  })
+}
 
-   
+  
 
    // use await with aysync 
   
@@ -52,6 +58,7 @@ export default class Dashboard extends Component {
         
         <Link to='/wizard'><button>Add New Property</button></Link>
         {housesToDisplay}
+        
         
       </div>
     )

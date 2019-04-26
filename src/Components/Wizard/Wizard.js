@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import axios from 'axios';
+
+
+
 
 
 export default class Wizard extends Component {
   constructor() {
     super()
-
+    this.routeChange = this.routeChange.bind(this)
+    
     this.state = {
       name: '',
       address: '',
       city: '',
       zipcode: '',
       state: ''
-
+      
     }
   }
 
@@ -20,12 +25,18 @@ export default class Wizard extends Component {
     this.setState({ [prop]: val })
   }
 
-  // {this.state.name}
-  // {this.state.address}
-  // {this.state.city}
-  // {this.state.zipcode}
+routeChange(){
+  let path = '/'
+  this.props.history.push(path)
+ 
+}
+
+  createHouse(){
+    axios.put(`/api/house`, {name: this.state.name, address: this.state.address, city: this.state.city, state: this.state.state, zip: this.state.zip, img: this.state.img, mortgage: this.state.mortgage, rent: this.state.rent }).then()
+  }
 
   render() {
+   
     return (
       <div>
         <h1>Wizard</h1>
@@ -53,7 +64,7 @@ export default class Wizard extends Component {
           type='text'
           placeholder='Zipcode'
           onChange={e => this.handleChange('zipcode', e.target.value)} />
-
+        <button onClick= {this.routeChange}>Complete</button>
 
 
 

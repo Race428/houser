@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const massive = require('massive')
 const { SERVER_PORT, CONNECTION_STRING } = process.env 
-// const houseCtrl = require('./controller')
+const houseCtrl = require('./controller')
 
 
 //TOP LEVEL MIDDLEWARE
@@ -18,8 +18,21 @@ app.get('/api/houses', (req, res )=> {
     res.status(200).send(result)
     console.log(result)
   })
-  
 })
+
+
+app.post('/api/houses',houseCtrl.create)
+
+app.delete('/api/house/:id', houseCtrl.delete)
+
+
+// app.post('/api/houses', (req, res )=> { 
+//   const db = req.app.get('db')
+//   db.house_input().then(result => {
+//     res.status(200).send(res.body)   
+//     console.log('this is working')
+//   })
+// })
 
 
 
