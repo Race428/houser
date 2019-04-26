@@ -15,8 +15,10 @@ app.use(express.json())
 app.get('/api/houses', (req, res )=> {
   const db = req.app.get('db')
   db.getHouse().then(result => {
-    res.status(200).send(result[0])
+    res.status(200).send(result)
+    console.log(result)
   })
+  
 })
 
 

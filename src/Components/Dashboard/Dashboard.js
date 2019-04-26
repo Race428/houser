@@ -15,17 +15,26 @@ export default class Dashboard extends Component {
     }
   }
 
-//ayscn code 
-  getHouse(){
-    axios.get(`/api/houses`).then(res => {
-      const houses = res.data
-      this.setState({houses})
+//ayscn code
+    // async getHouse(){
+    // axios.get(`/api/houses`).then(res => {
+    //   const houses = res.data
+    //    this.setState({houses})
 
-    })
-    }
-  componentDidMount(){
-    const { getHouse } = this.props
-    this.getHouse()
+    // })
+    // }
+   
+   
+    async componentDidMount(){
+     
+      const res = await axios.get(`/api/houses`)
+      console.log(res.data)
+         this.setState({
+           houses: res.data
+         })
+        
+
+      
   }
 
 
@@ -35,12 +44,12 @@ export default class Dashboard extends Component {
   
   render(){
     let housesToDisplay = this.state.houses.map((element,index)=> { 
-      return <h2 key={index}>{element}</h2>
+      return <House houseProps = {element}/>
     }) 
     return(
       <div>
         <h1>Dashboard</h1>
-        <House /> 
+        
         <Link to='/wizard'><button>Add New Property</button></Link>
         {housesToDisplay}
         
